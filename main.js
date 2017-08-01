@@ -105,21 +105,30 @@ function fillForm(data) {
 
   for (i=0;i<data.length;i++){
 
+    let newInput = document.createElement("input");
+
     console.log("Main Loop:",i);
-    let newInput = document.createElement("input")
-      //console.log("newInput:",newInput);
+    console.log(data[i].type);
+    if (data[i].type == "select") {
+      console.log("was select, hit the first if");
+      newInput = document.createElement("select");
+    }
+    else if (data[i].type == "textarea") {
+      newInput = document.createElement("textarea");
+      console.log("it was text area, hit the second if");
+    }
+
     newInput.setAttribute("type",data[i].type);
-      //console.log("\tType:",data[i].type);
     newInput.setAttribute("id",data[i].id);
-      //console.log("\tID:",data[i].id);
     newInput.setAttribute("placeholder",data[i].label);
-      //console.log("\tPlaceholder:",data[i].label);
+    newInput.setAttribute("icon",data[i].icon);
+    console.log(data[i].icon);
 
     console.log(newInput);
 
     if (data[i].type == "select") {
       console.log("The input type was 'select'")
-        //console.log("\tOptions:",data[i].options);
+      newInput.setAttribute("type","select");
 
       for (j=0;j<data[i].options.length;j++){
         console.log("sub-loop:",j);
@@ -131,10 +140,6 @@ function fillForm(data) {
         console.log(newInput);
       }
     console.log(newInput);
-    //console.log("past the sub-loop, here's the newInput again:",newInput);
-
-    //console.log("Wrapper:",wrapper);
-    //console.log("attempting to attach to wrapper")
 
     }
     wrapper.appendChild(newInput);
