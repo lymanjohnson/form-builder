@@ -85,16 +85,62 @@ let formData = [
 // HINTS:
 // As you can see, we access the first element in the array
 // with [0] and then grab the property "label" using the "." operator
-( function(){
-  // Select the first element from the array
-  let first = formData[ 0 ];
-  // Log the first object
-  console.log( first );
-  // Log the string "First Name"
-  console.log( first.label );
-} )();
+// ( function(){
+//
+//   // Select the first element from the array
+//   let first = formData[ 0 ];
+//   // Log the first object
+//   //console.log( first );
+//   // Log the string "First Name"
+//   //console.log( first.label );
+// } )();
 
 
 // -------- Your Code Goes Below this Line --------
 
+function fillForm(data) {
+  let wrapper = document.getElementById('fields');
 
+  console.log("Created wrapper:",wrapper);
+
+  for (i=0;i<data.length;i++){
+
+    console.log("Main Loop:",i);
+    let newInput = document.createElement("input")
+      //console.log("newInput:",newInput);
+    newInput.setAttribute("type",data[i].type);
+      //console.log("\tType:",data[i].type);
+    newInput.setAttribute("id",data[i].id);
+      //console.log("\tID:",data[i].id);
+    newInput.setAttribute("placeholder",data[i].label);
+      //console.log("\tPlaceholder:",data[i].label);
+
+    console.log(newInput);
+
+    if (data[i].type == "select") {
+      console.log("The input type was 'select'")
+        //console.log("\tOptions:",data[i].options);
+
+      for (j=0;j<data[i].options.length;j++){
+        console.log("sub-loop:",j);
+        let newOption = document.createElement("option");
+        newOption.setAttribute("value",data[i].options[j].value);
+        newOption.setAttribute("label",data[i].options[j].label);
+        newInput.appendChild(newOption);
+        console.log(newOption);
+        console.log(newInput);
+      }
+    console.log(newInput);
+    //console.log("past the sub-loop, here's the newInput again:",newInput);
+
+    //console.log("Wrapper:",wrapper);
+    //console.log("attempting to attach to wrapper")
+
+    }
+    wrapper.appendChild(newInput);
+    console.log(wrapper);
+  }
+
+}
+
+fillForm(formData);
